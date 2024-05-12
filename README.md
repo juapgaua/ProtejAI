@@ -1,3 +1,5 @@
+![](https://github.com/juapgaua/ProtejAI/blob/main/protejai.png)
+
 # ProtejAI
 Este código implementa um chatbot que utiliza o modelo Gemini Pro do Google AI para analisar a conformidade de uma política de privacidade com a Lei Geral de Proteção de Dados (LGPD). O usuário pode fornecer a política de privacidade como texto ou como um arquivo PDF. O chatbot então avalia vários aspectos da política e fornece uma análise concisa e objetiva da conformidade com a LGPD.
 
