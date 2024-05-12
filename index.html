@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protejai - Analise sua Privacidade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>ProtejAI</h1>
+    </header>
+    <img src="protejai.png" alt="ProtejAI Mascot" id="mascote">
+    <main>
+      <section v-if="!loading && !showResult">
+        <p>Como você gostaria de analisar sua política de privacidade?</p>
+        <button @click="inputMethod = 'url'">Inserir URL</button>
+        <button @click="inputMethod = 'text'">Digitar o texto</button>
+        <button @click="inputMethod = 'file'">Carregar arquivo PDF</button>
+      </section>
+
+      <section v-if="inputMethod === 'url' && !loading && !showResult">
+        <p>Cole a URL da política de privacidade:</p>
+        <input type="text" v-model="policyUrl" placeholder="https://exemplo.com/privacidade">
+        <button @click="analyzePolicy">Analisar Política</button>
+      </section>
+
+      <section v-if="inputMethod === 'text' && !loading && !showResult">
+        <p>Digite a política de privacidade:</p>
+        <textarea v-model="policyText" placeholder="Cole o texto aqui"></textarea>
+        <button @click="analyzePolicy">Analisar Política</button>
+      </section>
+
+      <section v-if="inputMethod === 'file' && !loading && !showResult">
+        <p>Carregue o arquivo PDF da política de privacidade:</p>
+        <input type="file" @change="handleFileUpload">
+        <button @click="analyzePolicy" :disabled="!pdfFile">Analisar Política</button>
+      </section>
+
+      <section v-if="loading">
+        <p>Analisando a Política de Privacidade...</p>
+        <div class="loader"></div>
+        <p class="curiosity">{{ curiosity }}</p>
+      </section>
+
+      <section v-if="showResult">
+        <h2>Resultados da Análise:</h2>
+        <div v-if="evaluation">
+          <pre class="evaluation-result">{{ evaluation }}</pre>
+        </div>
+        <div v-else>
+          <p>Não foi possível analisar a política de privacidade.</p>
+        </div>
+        <button @click="resetAnalysis">Analisar outra Política</button>
+      </section>
+    </main>
+    <footer>
+      <p><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm" target="_blank">Saiba mais sobre a LGPD</a></p>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
